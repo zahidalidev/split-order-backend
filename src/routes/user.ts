@@ -12,17 +12,3 @@ router.post("/", async(req: Request, res: Response) => {
 });
 
 export default router
-
-
-// import mongoose from 'mongoose';
-
-// // mongoose.set('useNewUrlParser', true);
-// // mongoose.set('useUnifiedTopology', true);
-// // mongoose.set('useCreateIndex', true);
-// // mongoose.set('useFindAndModify', false);
-
-// module.exports = () => {
-//     mongoose.connect("mongodb+srv://zahidali123:zahidali123@cluster0.b5iky.mongodb.net/splitorder")
-//         .then(() => console.log('connected to mongodb'))
-//         .catch((err: any) => console.log('could not connect to mongodb', err))
-// }
