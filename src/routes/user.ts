@@ -1,14 +1,28 @@
 import express, { Request, Response } from "express";
-const { User } = require("../models/user")
-import * as _ from "lodash"
+import * as _ from "lodash";
+import bcrypt from "bcrypt";
+
+import { User, validateUser } from "../models/user";
+import { validate } from "../middleWare/validate";
 
 const router = express.Router();
 
-router.post("/", async(req: Request, res: Response) => {
-  const user = new User(_.pick(req.body, ['fullName', 'email', 'contactNumber', 'fullAddress', 'password']))
-  console.log(user)
-  await user.save()
-  res.send("hello")
-});
+router.post(
+  "/",
+  validate(validateUser),
+  async (req: Request, res: Response) => {
+    try {
+      const user = new User(
+        _.pick(req.body, ["fullName", "email", "number", "address", "password"])
+      );
+      const salt = await bcrypt.genSalt(7);
+      user.password = await bcrypt.hash(user.password, salt);
+      await user.save();
+      return res.send("Added");
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
+  }
+);
 
-export default router
+export default router;
