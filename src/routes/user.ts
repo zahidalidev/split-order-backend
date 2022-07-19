@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 
 import { User, validateUser } from "../models/user";
 import { validate } from "../middleWare/validate";
+import { auth } from "../middleWare/auth";
 
 const router = express.Router();
 
@@ -24,5 +25,10 @@ router.post(
     }
   }
 );
+
+router.get("/me", auth, async (req: Request, res: Response) => {
+  const user = await User.findById(req.body.user._id).select("-password");
+  res.send(user);
+});
 
 export default router;
