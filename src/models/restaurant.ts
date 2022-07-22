@@ -16,12 +16,12 @@ const restaurantSchema = new mongoose.Schema({
 
 export const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
-interface Restaurant {
+interface RestaurantDet {
   name: string;
   userId: string;
 }
 
-export const validateRestaurant = (restaurant: Restaurant) => {
+export const validateRestaurant = (restaurant: RestaurantDet) => {
   const schema = Joi.object({
     name: Joi.string().required(),
   });
