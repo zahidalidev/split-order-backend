@@ -47,7 +47,6 @@ router.post(
 );
 
 router.get("/items/:restId", auth, async (req: Request, res: Response) => {
-  console.log(req.params);
   try {
     const items = await Item.find({ restId: req.params.restId });
     res.send(items);

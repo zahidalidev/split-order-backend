@@ -28,9 +28,8 @@ router.post(
 
 router.get("/me", auth, async (req: Request, res: Response) => {
   try {
-    console.log("/me", req.body);
     const user = await User.findById(req.body.user._id).select("-password");
-    res.send("user");
+    res.send(user);
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: error });
