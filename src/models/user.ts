@@ -35,6 +35,9 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024,
   },
+  pushToken: {
+    type: String,
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -57,6 +60,7 @@ export const validateUser = (user: Object) => {
     number: Joi.number().min(0).required(),
     address: Joi.string().min(5).max(255).required(),
     password: Joi.string().min(5).max(1024).required(),
+    pushToken: Joi.string(),
   });
 
   return schema.validate(user);

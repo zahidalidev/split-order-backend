@@ -15,7 +15,7 @@ interface User {
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header("x-auth-token");
-  if (!token)
+  if (!token || token === "null")
     return res
       .status(401)
       .json({ message: "Access denied. No token provided" });

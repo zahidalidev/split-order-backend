@@ -27,8 +27,23 @@ router.post(
 );
 
 router.get("/me", auth, async (req: Request, res: Response) => {
-  const user = await User.findById(req.body.user._id).select("-password");
-  res.send(user);
+  try {
+    console.log("/me", req.body);
+    const user = await User.findById(req.body.user._id).select("-password");
+    res.send("user");
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: error });
+  }
+});
+
+router.get("/all", auth, async (req: Request, res: Response) => {
+  try {
+    const users = await User.find().select("-password");
+    res.send(users);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
 });
 
 export default router;

@@ -4,16 +4,13 @@ import { dbConnect } from "./startup/db";
 
 const app = express();
 
-app.set("port", (process.env.PORT || 5000));
+app.set("port", process.env.PORT || 5000);
 app.use(json());
-app.use(cors())
+app.use(cors());
 
-dbConnect()
+dbConnect();
 
-require('./startup/routes')(app);
+require("./startup/routes")(app);
 
-const port = app.get("port")
-app.listen(port, () =>
-    console.log(`Running on port ${port}`)
-);
-
+const port = app.get("port");
+app.listen(port, () => console.log(`Running on port ${port}`));

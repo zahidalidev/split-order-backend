@@ -29,15 +29,13 @@ router.get("/", auth, async (req: Request, res: Response) => {
   try {
     const restaurants = await Restaurant.find({ userId: req.body.user._id });
     res.send(restaurants);
-    console.log(restaurants);
   } catch (error) {}
 });
 
 router.post(
   "/item",
-  validate(validateRestItems),
+  [validate(validateRestItems), auth],
   async (req: Request, res: Response) => {
-    console.log(req.body);
     try {
       const item = new Item(_.pick(req.body, ["name", "price", "restId"]));
       await item.save();
@@ -47,5 +45,15 @@ router.post(
     }
   }
 );
+
+router.get("/items/:restId", auth, async (req: Request, res: Response) => {
+  console.log(req.params);
+  try {
+    const items = await Item.find({ restId: req.params.restId });
+    res.send(items);
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+});
 
 export default router;
