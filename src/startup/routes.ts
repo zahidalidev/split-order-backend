@@ -2,9 +2,11 @@ import { Application } from "express";
 import user from "../routes/user";
 import auth from "../routes/auth";
 import restaurant from "../routes/restaurant";
+import order from "../routes/order";
 
 module.exports = function (app: Application) {
   app.use("/api/users", user);
   app.use("/api/auth", auth);
   app.use("/api/restaurant", restaurant);
+  app.use("/api/order", order);
 };

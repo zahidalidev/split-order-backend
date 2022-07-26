@@ -13,6 +13,8 @@ const orderSchema = new mongoose.Schema({
       orders: [
         {
           itemId: ObjectId,
+          name: String,
+          price: Number,
           quantity: Number,
         },
       ],
@@ -20,7 +22,7 @@ const orderSchema = new mongoose.Schema({
   ],
 });
 
-export const order = mongoose.model("Order", orderSchema);
+export const Order = mongoose.model("Order", orderSchema);
 
 interface Order {
   mainUserId: string;
@@ -29,7 +31,9 @@ interface Order {
       userId: string;
       orders: [
         {
-          itemId: ObjectId;
+          itemId: string;
+          name: string;
+          price: Number;
           quantity: Number;
         }
       ];
@@ -46,6 +50,8 @@ export const validateOrder = (order: Order) => {
         orders: Joi.array().items(
           Joi.object({
             itemId: Joi.string().required(),
+            name: Joi.string().required(),
+            price: Joi.number().required(),
             quantity: Joi.number().required(),
           })
         ),
@@ -53,5 +59,5 @@ export const validateOrder = (order: Order) => {
     ),
   });
 
-  schema.validate(order);
+  return schema.validate(order);
 };
