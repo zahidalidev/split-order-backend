@@ -31,4 +31,6 @@ router.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/email", async (req: Request, res: Response) => {});
+
 export default router;
