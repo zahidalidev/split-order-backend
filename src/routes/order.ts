@@ -22,4 +22,13 @@ router.post(
   }
 );
 
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const order = await Order.find({ mainUserId: req.params.id });
+    return res.send(order);
+  } catch (error: any) {
+    return res.status(400).json({ message: error });
+  }
+});
+
 export default router;

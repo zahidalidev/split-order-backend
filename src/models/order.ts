@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema({
   invitedUsers: [
     {
       userId: ObjectId,
+      userName: String,
       orders: [
         {
           itemId: ObjectId,
@@ -29,6 +30,7 @@ interface Order {
   invitedUsers: [
     {
       userId: string;
+      userName: String;
       orders: [
         {
           itemId: string;
@@ -47,6 +49,7 @@ export const validateOrder = (order: Order) => {
     invitedUsers: Joi.array().items(
       Joi.object({
         userId: Joi.string().required(),
+        userName: Joi.string().required(),
         orders: Joi.array().items(
           Joi.object({
             itemId: Joi.string().required(),
