@@ -60,6 +60,7 @@ export const validateUser = (user: Object) => {
     number: Joi.number().min(0).required(),
     address: Joi.string().min(5).max(255).required(),
     password: Joi.string().min(5).max(1024).required(),
+    confirmPassword: Joi.string().required().valid(Joi.ref("password")),
     pushToken: Joi.string(),
   });
 
