@@ -1,6 +1,10 @@
 import express, { Request, Response } from "express";
+import { auth } from "../middleWare/auth";
+require("dotenv").config();
+
 import { validate } from "../middleWare/validate";
 import { Order, validateOrder } from "../models/order";
+import { sendEmail } from "../utils/sendEmail";
 
 const router = express.Router();
 
@@ -31,6 +35,8 @@ router.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/email", async (req: Request, res: Response) => {});
+router.post("/email", auth, async (req: Request, res: Response) => {
+  sendEmail(req.body);
+});
 
 export default router;
