@@ -29,7 +29,19 @@ router.get("/", auth, async (req: Request, res: Response) => {
   try {
     const restaurants = await Restaurant.find({ userId: req.body.user._id });
     res.send(restaurants);
-  } catch (error) {}
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+});
+
+router.get("/:id", auth, async (req: Request, res: Response) => {
+  try {
+    const restaurants = await Restaurant.findById(req.params.id);
+    res.send(restaurants);
+  } catch (error: any) {
+    console.log(error);
+    return res.status(400).json({ message: error.message });
+  }
 });
 
 router.post(

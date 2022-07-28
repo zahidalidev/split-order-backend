@@ -26,6 +26,17 @@ router.post(
   }
 );
 
+router.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    console.log("req.params: ", req.params);
+    const order = await Order.findByIdAndDelete(req.params.id);
+    return res.send(order);
+  } catch (error: any) {
+    console.log(error);
+    return res.status(400).json({ message: error });
+  }
+});
+
 router.get("/:id", async (req: Request, res: Response) => {
   try {
     const order = await Order.find({ mainUserId: req.params.id });
@@ -36,7 +47,12 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/email", auth, async (req: Request, res: Response) => {
-  sendEmail(req.body);
+  try {
+    sendEmail(req.body);
+    res.send("Email sent");
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
 });
 
 export default router;

@@ -19,9 +19,7 @@ export const sendEmail = async (body: any) => {
     order.invitedUsers.forEach(async (user: any) => {
       const html = `<div class="container" style="max-width: 1000px; margin-left: auto; margin-right: auto; padding-left: 10px; padding-right:10px;" >
       <ul class="responsive-table">
-        <h2 style="font-weight: 500; margin: 16px" >Charges of: ${
-          body.user.fullName
-        }, ${body.user.email}  Date: ${new Date().toDateString()}</h2>
+        <h2 style="font-weight: 500; margin: 16px" >Date: ${new Date().toDateString()}</h2>
         <li class="table-header" style="border-radius: 3px; padding: 25px 30px; display: flex; justify-content: space-between; margin-bottom: 25px; background-color: #95A5A6; font-size: 14px; text-transform: uppercase; letter-spacing: 0.03em;" >
           <div class="col col-1" style="width: 10%;">No.</div>
           <div class="col col-2" style="width: 40%;" >Name</div>
@@ -47,8 +45,8 @@ export const sendEmail = async (body: any) => {
       const htmlMain = `<div class="container" style="max-width: 1000px; margin-left: auto; margin-right: auto; padding-left: 10px; padding-right:10px;" >
       <ul class="responsive-table">
         <h2 style="font-weight: 500; margin: 16px" >Bill details of: ${
-          user.userName
-        }, ${user.userEmail}  Date: ${new Date().toDateString()}</h2>
+          body.user.fullName
+        }, ${body.user.email}  Date: ${new Date().toDateString()}</h2>
         <li class="table-header" style="border-radius: 3px; padding: 25px 30px; display: flex; justify-content: space-between; margin-bottom: 25px; background-color: #95A5A6; font-size: 14px; text-transform: uppercase; letter-spacing: 0.03em;" >
           <div class="col col-1" style="width: 10%;">No.</div>
           <div class="col col-2" style="width: 40%;" >Name</div>
