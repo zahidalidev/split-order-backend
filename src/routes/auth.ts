@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post("/", validate(validateAuth), async (req, res) => {
   try {
+    console.log("login");
     const user = await User.findOneAndUpdate(
       { email: req.body.email },
       { pushToken: req.body.pushToken }
