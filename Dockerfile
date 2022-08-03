@@ -3,7 +3,6 @@ WORKDIR /src
 COPY . ./
 COPY package.json ./
 COPY tsconfig.json ./
-RUN ls -a
 RUN npm install
 RUN npm run build
 ## this is stage two , where the app actually runs
