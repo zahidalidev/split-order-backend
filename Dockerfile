@@ -2,12 +2,14 @@ FROM node:14-alpine as development
 
 WORKDIR /src
 
-COPY package*.json .
+COPY ./split-order-backend/package.json .
+COPY ./split-order-backend/package-lock.json .
 
 RUN npm install
 
-COPY . .
+COPY ./split-order-backend .
 
+RUN npm install typescript
 RUN npm run build
 
 
@@ -20,7 +22,8 @@ ENV JWT_PRIVATE_KEY="zahidali123"
 # COPY --chown=node:node .env .
 
 WORKDIR /src
-COPY package*.json .
+COPY ./split-order-backend/package.json .
+COPY ./split-order-backend/package-lock.json .
 RUN npm install --only=production
 COPY --from=development /src/dist ./dist
 CMD ["node", "dist/index.js"]
