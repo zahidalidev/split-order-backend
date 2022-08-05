@@ -5,8 +5,8 @@ services:
     container_name: split-order
     image: zahidali5/split-frontend
     build:
-      context: .
-      dockerfile: ./split-order-frontend/Dockerfile
+      context: split-order-frontend
+      dockerfile: Dockerfile
     env_file: ./split-order-frontend/.env
     ports:
       - 19000:19000
@@ -16,6 +16,8 @@ services:
     container_name: split-order2
     image: zahidali5/split-backend
     build:
-      dockerfile: ./split-order-backend/Dockerfile
+      context: split-order-backend
+      dockerfile: Dockerfile
     ports:
       - 5000:5000
+
