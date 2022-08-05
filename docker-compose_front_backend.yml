@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: split-order
+    image: zahidali5/split-frontend
+    build:
+      context: .
+      dockerfile: ./split-order-frontend/Dockerfile
+    env_file: ./split-order-frontend/.env
+    ports:
+      - 19000:19000
+      - 19001:19001
+
+  backend:
+    container_name: split-order2
+    image: zahidali5/split-backend
+    build:
+      dockerfile: ./split-order-backend/Dockerfile
+    ports:
+      - 5000:5000
